@@ -2,7 +2,7 @@ const refs = {
     feedbackForm: document.querySelector(".feedback-form"),
 }
 // ств обєкт в якому буду значення 
-let formData = {};
+let formData = { email: '', message: '' };
 
 
 const formDataValidation = () => {
@@ -10,6 +10,8 @@ const formDataValidation = () => {
     const formDataFromLS = JSON.parse(localStorage.getItem('feedback-form-state'));
 
     if (formDataFromLS === null) {
+        refs.feedbackForm.elements.email.value = formData.email;
+        refs.feedbackForm.elements.message.value = formData.message;
         return;
 }
 
@@ -62,7 +64,10 @@ const buttonHandle = evt => {
     }
 
     console.log(formData);
-    formData = { email: '', message: '' };
+    // formData = { email: '', message: '' };
+
+    formData.email = '';
+    formData.message = '';
 
     evt.target.reset();
     localStorage.removeItem("feedback-form-state");
